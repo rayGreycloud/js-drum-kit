@@ -58,6 +58,15 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  // Listen for key press
+  window.addEventListener('keydown', function (e) {
+    // Grab related audio element
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    if (!audio) return; // stop if no match
+
+    audio.play();
+
+  });
 
 </script>
 
