@@ -58,8 +58,8 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  // Listen for keypress
-  window.addEventListener('keydown', function (e) {
+  // Method to play selected sound
+  function playSound(e) {
     // Grab related audio element
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     // Grab related element with key class
@@ -68,27 +68,28 @@
     // Stop if no keymatch
     if (!audio) return;
 
-    // Rewind sound if multiple keypresses
+    // Rewind sound if same key pressed
     audio.currentTime = 0;
     // Trigger sound
     audio.play();
-
     // Add animation class
     key.classList.add('playing');
-
-  });
-
+  }
+  // End animation when sound ends
   function removeTransition(e) {
     // Skip transition event if not transform
     if (e.propertyName !== 'transform') return;
-
+    // Remove class
     this.classList.remove('playing');
   }
-
+  // Add listener for sound end and remove animation
   const keys = document.querySelectorAll('.key');
   keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
   });
+
+  // Add eventListener for keypress
+  window.addEventListener('keydown', playSound);
 
 </script>
 
